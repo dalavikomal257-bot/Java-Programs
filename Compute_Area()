@@ -1,0 +1,88 @@
+package oop;
+import java.util.Scanner;
+
+abstract class Shape {
+protected double dim1, dim2;
+
+Shape(double a, double b) {
+dim1 = a;
+dim2 = b;
+}
+
+void setValues(double a, double b) {
+dim1 = a;
+dim2 = b;
+}
+
+// Abstract method -&gt; Shape cannot be instantiated
+abstract double computeArea();
+}
+
+class Triangle extends Shape {
+Triangle(double b, double h) {
+super(b, h);
+}
+double computeArea() {
+return 0.5 * dim1 * dim2; // 1/2 * base * height
+}
+
+}
+
+class Rectangle extends Shape {
+Rectangle(double l, double w) {
+super(l, w);
+}
+
+double computeArea() {
+return dim1 * dim2; // length * width
+}
+}
+
+public class ShapeDemo {
+
+Scanner sc = new Scanner(System.in);
+static int choice;
+
+public static void main(String[] args) {
+Scanner sc = new Scanner(System.in);
+do {
+System.out.println(&quot;Shape Area Calculator&quot;);
+System.out.println(&quot;1. Triangle&quot;);
+System.out.println(&quot;2. Rectangle&quot;);
+System.out.println(&quot;3. Exit&quot;);
+System.out.print(&quot;Enter your choice: &quot;);
+int choice = sc.nextInt();
+
+Shape obj;
+
+switch (choice) {
+case 1:
+System.out.print(&quot;Enter base and height: &quot;);
+double b = sc.nextDouble();
+double h = sc.nextDouble();
+obj = new Triangle(b, h);
+break;
+
+case 2:
+System.out.print(&quot;Enter length and width: &quot;);
+double l = sc.nextDouble();
+double w = sc.nextDouble();
+obj = new Rectangle(l, w);
+break;
+
+case 3: System.out.println(&quot;Exiting program...&quot;);
+System.exit(0);
+
+default:
+System.out.println(&quot;Invalid choice.&quot;);
+sc.close();
+return;
+}
+
+System.out.println(&quot;Area = &quot; +obj.computeArea());
+
+}while(ShapeDemo.choice != 3);
+
+sc.close();
+}
+}
